@@ -1,0 +1,110 @@
+.toolbar {
+  grid-area: toolbar;
+  @include flex-between;
+  background: $color-bg-surface;
+  border-bottom: 1px solid $color-border;
+  padding: 0 $space-4;
+  height: $toolbar-height;
+  gap: $space-4;
+  z-index: $z-toolbar;
+  min-width: 0;
+}
+
+.left {
+  @include flex-start;
+  gap: $space-3;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.right {
+  @include flex-start;
+  gap: $space-3;
+  flex-shrink: 0;
+}
+
+.docTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include truncate;
+  max-width: 240px;
+
+  @include respond-to('mobile') {
+    max-width: 140px;
+  }
+}
+
+.langSelect {
+  background: $color-bg-input;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-sm;
+  color: $color-text-primary;
+  font-size: $font-size-sm;
+  padding: $space-1 $space-2;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    border-color: $color-border-focus;
+  }
+}
+
+.onlineBadge {
+  @include flex-center;
+  gap: $space-1;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  flex-shrink: 0;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $color-status-ok;
+  }
+}
+
+.connStatus {
+  font-size: $font-size-xs;
+  padding: $space-1 $space-2;
+  border-radius: $border-radius-pill;
+  flex-shrink: 0;
+
+  &.connected {
+    color: $color-status-ok;
+    background: rgba($color-status-ok, 0.12);
+  }
+
+  &.disconnected {
+    color: $color-status-warn;
+    background: rgba($color-status-warn, 0.12);
+  }
+
+  &.failed {
+    color: $color-status-error;
+    background: rgba($color-status-error, 0.12);
+  }
+}
+
+// Small inline button shown beside the "Connection failed" badge.
+.retryBtn {
+  @include button-reset;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $color-status-error;
+  border: 1px solid rgba($color-status-error, 0.4);
+  border-radius: $border-radius-pill;
+  padding: $space-1 $space-2;
+  flex-shrink: 0;
+  transition: background $transition-fast, border-color $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    background: rgba($color-status-error, 0.10);
+    border-color: $color-status-error;
+  }
+}

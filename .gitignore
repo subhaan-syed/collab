@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Databases
+*.db
+
+# Environment
+.env
+.env.*
+
+# Build output
+dist/
+
+# Test output
+playwright-report/
+test-results/
+
+# IDE / tooling
+.claude/

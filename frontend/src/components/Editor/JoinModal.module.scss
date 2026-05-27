@@ -1,0 +1,130 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: $z-modal-bg;
+  @include flex-center;
+}
+
+.modal {
+  @include glass-surface;
+  width: 100%;
+  max-width: $modal-max-width;
+  padding: $space-8;
+  z-index: $z-modal;
+  animation: modal-in 200ms ease forwards;
+
+  @include respond-to('mobile') {
+    margin: $space-4;
+    padding: $space-6;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $space-2;
+  color: $color-text-primary;
+}
+
+.subtitle {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $space-6;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-bottom: $space-5;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+}
+
+.input {
+  background: $color-bg-input;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+  color: $color-text-primary;
+  font-size: $font-size-base;
+  padding: $space-3 $space-4;
+  width: 100%;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    border-color: $color-border-focus;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $color-text-disabled;
+  }
+}
+
+.colorSwatches {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+
+.swatch {
+  @include button-reset;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform $transition-fast, border-color $transition-fast;
+  @include focus-ring;
+
+  &.selected {
+    border-color: #fff;
+    transform: scale(1.15);
+  }
+
+  &:hover:not(.selected) {
+    transform: scale(1.1);
+  }
+}
+
+.actions {
+  margin-top: $space-8;
+}
+
+.submitBtn {
+  @include button-reset;
+  background: $color-accent;
+  color: #fff;
+  border-radius: $border-radius-md;
+  padding: $space-3 $space-6;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  width: 100%;
+  transition: background $transition-fast;
+  @include focus-ring;
+
+  &:hover:not(:disabled) {
+    background: $color-accent-hover;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

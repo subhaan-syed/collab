@@ -1,0 +1,135 @@
+@use 'variables' as *;
+
+// ─── Responsive breakpoints ───────────────────────────────────────────────────
+
+/// Apply styles for the given breakpoint and above.
+/// Usage:  @include respond-to('tablet') { ... }
+@mixin respond-to($bp) {
+  @if $bp == 'mobile' {
+    @media (max-width: #{$bp-tablet - 1px}) {
+      @content;
+    }
+  } @else if $bp == 'tablet' {
+    @media (min-width: #{$bp-tablet}) and (max-width: #{$bp-desktop - 1px}) {
+      @content;
+    }
+  } @else if $bp == 'desktop' {
+    @media (min-width: #{$bp-desktop}) {
+      @content;
+    }
+  } @else if $bp == 'tablet-up' {
+    @media (min-width: #{$bp-tablet}) {
+      @content;
+    }
+  }
+}
+
+// ─── Flexbox shortcuts ────────────────────────────────────────────────────────
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+// ─── Text truncation ──────────────────────────────────────────────────────────
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ─── Focus ring ───────────────────────────────────────────────────────────────
+
+/// Keyboard-accessible focus indicator. Only appears on :focus-visible
+/// (keyboard navigation), not on mouse click.
+@mixin focus-ring($color: $color-border-focus) {
+  &:focus {
+    outline: none;
+  }
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+// ─── Glassmorphism surface ────────────────────────────────────────────────────
+
+/// Frosted-glass card style for modals and floating panels.
+@mixin glass-surface {
+  background: rgba($color-bg-surface, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid $color-border;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+// ─── Scrollbar styling ────────────────────────────────────────────────────────
+
+@mixin styled-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: $color-border $color-bg-sidebar;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color-bg-sidebar;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-border;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: $color-border-focus;
+    }
+  }
+}
+
+// ─── Visually hidden (accessible off-screen) ─────────────────────────────────
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ─── Button reset ─────────────────────────────────────────────────────────────
+
+@mixin button-reset {
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+
+// ─── Card surface ─────────────────────────────────────────────────────────────
+
+@mixin card {
+  background: $color-bg-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+}

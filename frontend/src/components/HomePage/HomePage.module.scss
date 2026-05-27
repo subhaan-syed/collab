@@ -1,0 +1,116 @@
+.page {
+  min-height: 100vh;
+  background: $color-bg-editor;
+  @include flex-center;
+  padding: $space-6;
+}
+
+.container {
+  width: 100%;
+  max-width: 680px;
+}
+
+.header {
+  margin-bottom: $space-10;
+}
+
+.logo {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  letter-spacing: -0.02em;
+  margin-bottom: $space-2;
+}
+
+.tagline {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+}
+
+.explainer {
+  margin-top: $space-3;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-ui;
+  max-width: 560px;
+  opacity: 0.85;
+}
+
+.toolbar {
+  @include flex-between;
+  margin-bottom: $space-5;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.newDocBtn {
+  @include button-reset;
+  background: $color-accent;
+  color: #fff;
+  border-radius: $border-radius-md;
+  padding: $space-2 $space-4;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  transition: background $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    background: $color-accent-hover;
+  }
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.docItem {
+  @include card;
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: $space-4 $space-5;
+  cursor: pointer;
+  transition: background $transition-fast, border-color $transition-fast;
+  @include focus-ring;
+
+  &:hover {
+    background: $color-bg-hover;
+    border-color: $color-border-focus;
+  }
+}
+
+.docName {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  @include truncate;
+  margin-bottom: $space-1;
+}
+
+.docMeta {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  font-family: $font-editor;
+}
+
+.empty {
+  @include card;
+  padding: $space-8;
+  text-align: center;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.loading {
+  text-align: center;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  padding: $space-8;
+}

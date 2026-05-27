@@ -1,0 +1,96 @@
+.sidebar {
+  grid-area: sidebar;
+  background: $color-bg-sidebar;
+  border-left: 1px solid $color-border;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @include respond-to('mobile') {
+    border-left: none;
+    border-top: 1px solid $color-border;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: $space-2 $space-3;
+    gap: $space-2;
+    min-height: 52px;
+    overflow-x: auto;
+    @include styled-scrollbar;
+  }
+}
+
+.heading {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $color-text-secondary;
+  padding: $space-4 $space-4 $space-2;
+
+  @include respond-to('mobile') {
+    display: none;
+  }
+}
+
+.list {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  @include styled-scrollbar;
+
+  @include respond-to('mobile') {
+    display: contents; // let items flow into the flex parent
+  }
+}
+
+.item {
+  @include flex-start;
+  gap: $space-3;
+  padding: $space-2 $space-4;
+
+  @include respond-to('mobile') {
+    padding: 0;
+  }
+}
+
+.chip {
+  @include flex-center;
+  gap: $space-2;
+  padding: $space-1 $space-3;
+  border-radius: $border-radius-pill;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: #fff;
+  white-space: nowrap;
+  @include truncate;
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.name {
+  @include truncate;
+  max-width: 160px;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+
+  @include respond-to('mobile') {
+    display: none;
+  }
+}
+
+.selfLabel {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  padding: $space-2 $space-4;
+  font-style: italic;
+
+  @include respond-to('mobile') {
+    display: none;
+  }
+}
