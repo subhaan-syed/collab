@@ -11,7 +11,7 @@ Documents survive server restarts.
 
 A CRDT, or Conflict-free Replicated Data Type, is a data structure designed so
 that multiple independent copies of it can be updated concurrently and then merged
-in any order without any coordination, and the result is always the same. In a
+in any order without any coordination, with the same result every time. In a
 classic text editor, if two users insert a character at position 5 at the same
 time, a naive approach based on character offsets would produce different results
 depending on which insert was processed first. One user's edit would overwrite or
@@ -21,7 +21,7 @@ character, and by defining a deterministic conflict-resolution rule that every
 site applies identically.
 
 For this project, the specific CRDT chosen is an RGA (Replicated Growable Array).
-In an RGA every character carries a unique identifier that is a pair of (siteId,
+In an RGA every character carries a unique identifier: a pair of (siteId,
 logicalClock). When two characters are inserted after the same anchor position
 concurrently, the RGA uses a deterministic tie-break rule: the character whose
 siteId is lexicographically greater is placed first (to the left). Because every
@@ -34,7 +34,7 @@ deleted character as its anchor still finds it.
 Without a CRDT, real-time collaboration requires a central server to arbitrate
 every change, or operational transformation (OT), which requires a complex
 transformation matrix for every pair of operation types and is notoriously
-difficult to implement correctly for operations beyond basic insert/delete. CRDTs
+difficult to implement correctly for anything beyond basic insert/delete. CRDTs
 shift the complexity to the data structure itself, making the merge logic purely
 local and peer-to-peer. The result is a system where the server is only needed for
 fanout (forwarding operations) and persistence, not for conflict arbitration.
@@ -83,7 +83,7 @@ Each receiving browser:
 2. Translates the CRDT change into a CodeMirror document transaction.
 
 Cursor and selection presence follow the same fan-out path but are never persisted
-to the database: they are ephemeral and forwarded directly to other clients.
+to the database. They are ephemeral and forwarded directly to other clients.
 
 On server restart, the FastAPI backend replays the full ops log from PostgreSQL
 through the Python RGA implementation to reconstruct the document text.
@@ -143,11 +143,10 @@ as their anchor are still placed correctly relative to surrounding characters.
 Requires Docker and Docker Compose.
 
 ```bash
-# Clone and enter the project
 git clone https://github.com/subhaan-syed/collab.git
 cd collab
 
-# Copy the example environment file
+# Copy and review the environment file (defaults work out of the box)
 cp .env.example .env
 
 # Build and start all services (FastAPI, PostgreSQL, MongoDB)
@@ -168,20 +167,20 @@ Open http://localhost:5173 in your browser.
 
 ### Without Docker (local development)
 
-Requirements: Python 3.11+, Node.js 18+, a local PostgreSQL 15 instance, a
-local MongoDB 6 instance.
+Requirements: Python 3.11+, Node.js 18+, PostgreSQL 15, MongoDB 6.
 
 ```bash
+git clone https://github.com/subhaan-syed/collab.git
+cd collab
+
 # Apply the database schema
 psql -U <your_user> -d collab -f init.sql
 
-# Install backend dependencies
+# Install backend dependencies and configure environment
 cd backend
 pip install -r requirements.txt
-
-# Create a .env file with your local DB connection strings
 cp ../.env.example .env
-# Edit .env to point to your local DBs
+# Edit .env to point to your local database instances
 
 # Start the FastAPI server
 uvicorn app.main:app --reload --port 8000
@@ -196,7 +195,7 @@ npm run dev
 
 ## Running tests
 
-### CRDT unit tests (Jest — TypeScript)
+### CRDT unit tests (Jest)
 
 ```bash
 cd frontend
@@ -205,7 +204,7 @@ npm test
 
 Expected output: 46 tests passing across 5 test suites.
 
-### Backend tests (pytest — Python)
+### Backend tests (pytest)
 
 ```bash
 cd backend
@@ -216,7 +215,7 @@ Expected output: 22 tests passing.
 
 ### End-to-end tests (Playwright)
 
-Requires both the backend and frontend dev server to be running.
+Requires both the backend and the frontend dev server to be running.
 
 ```bash
 # Terminal 1
@@ -227,7 +226,7 @@ cd frontend && npm run dev
 
 # Terminal 3
 cd frontend
-npx playwright install chromium   # first run only
+npx playwright install chromium   # first time only
 npx playwright test
 ```
 
