@@ -51,7 +51,7 @@ fanout (forwarding operations) and persistence, not for conflict arbitration.
        |     ^                        |     ^
        |     |  WebSocket             |     |  WebSocket
        v     |                        v     |
-  +------------------------------------------+
+  +-------------------------------------------+
   |           FastAPI (Python 3.11)           |
   |                                           |
   |  ConnectionManager (in-memory rooms)      |
