@@ -55,7 +55,7 @@ fanout (forwarding operations) and persistence, not for conflict arbitration.
   |           FastAPI (Python 3.11)           |
   |                                           |
   |  ConnectionManager (in-memory rooms)      |
-  |  Python RGA CRDT (state reconstruction)  |
+  |  Python RGA CRDT (state reconstruction)   |
   |                                           |
   +--------+--------------------+-------------+
            |                    |
